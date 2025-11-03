@@ -1,9 +1,8 @@
 import { NextRequest } from "next/server";
-import { PrismaClient } from "@/generated/prisma/client";
 import { SHA1 } from "crypto-js";
+import db from "@/models/prismaClient";
 
 export async function POST(request: NextRequest) {
-  const db = new PrismaClient();
   const response = await request.json();
   const { name, email, password, phone, address, province } = response;
   if (!name || !email || !password || !phone || !address || !province) {
