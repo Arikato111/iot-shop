@@ -1,8 +1,13 @@
 import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
 class userCookie {
   token = "";
   constructor() {
     this.token = Cookies.get("token") ?? "";
+  }
+  decode() {
+    if (!this.token) return null;
+    return jwtDecode(this.token)
   }
   isLogin() {
     return !!this.token;
