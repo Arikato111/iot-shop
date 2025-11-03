@@ -13,3 +13,74 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model user {
+  id           Int            @id @default(autoincrement())
+  name         String
+  email        String
+  phone        String
+  address      String         @default("")
+  province     Province       @relation(fields: [province_id], references: [id])
+  province_id  Int
+  password     String
+  rank         Boolean
+  cart         cart[]
+  order        order[]
+  order_detail order_detail[]
+}
+
+model Province {
+  id      Int       @id @default(autoincrement())
+  name    String
+  user    user[]
+  product product[]
+  order   order[]
+}
+
+model product {
+  id               Int            @id @default(autoincrement())
+  name             String
+  detail           String
+  price            Int
+  watch_count      Int
+  image            String
+  stock            Int
+  place_of_sele    Province       @relation(fields: [place_of_sele_id], references: [id])
+  place_of_sele_id Int
+  cart             cart[]
+  order_detail     order_detail[]
+}
+
+model cart {
+  id         Int     @id @default(autoincrement())
+  user_id    Int
+  user       user    @relation(fields: [user_id], references: [id])
+  product_id Int
+  product    product @relation(fields: [product_id], references: [id])
+}
+
+model order {
+  id            Int            @id @default(autoincrement())
+  user_id       Int
+  user          user           @relation(fields: [user_id], references: [id])
+  total_price   Int
+  product_count Int
+  address       String         @default("")
+  province_id   Int
+  province      Province       @relation(fields: [province_id], references: [id])
+  date          DateTime       @default(now())
+  order_detail  order_detail[]
+}
+
+model order_detail {
+  id               Int     @id @default(autoincrement())
+  order_id         Int
+  order            order   @relation(fields: [order_id], references: [id])
+  user_id          Int
+  user             user    @relation(fields: [user_id], references: [id])
+  product_id       Int
+  product          product @relation(fields: [product_id], references: [id])
+  product_price    Int
+  product_discount Int
+  count            Int
+}
