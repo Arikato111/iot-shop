@@ -22,6 +22,7 @@ export async function POST(request: NextRequest) {
   }
 
   const passwordHash = SHA1(password).toString();
+  console.log(user.password, ":", passwordHash);
   if (user.password !== passwordHash) {
     return new Response(JSON.stringify({ message: "Invalid credentials" }), {
       status: 401,
