@@ -12,6 +12,13 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  const validate_email = await db.user.findFirst({ where: { email } });
+  if (!validate_email) {
+    return new Response(JSON.stringify({ message: "Email already exists" }), {
+      status: 400,
+    });
+  }
+
   const passwordHash = SHA1(password).toString();
   const provinceCheck = await db.province.findFirst({
     where: { name: province },
