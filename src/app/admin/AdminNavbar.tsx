@@ -6,7 +6,7 @@ export default function AdminNavbar() {
         <Box sx={{padding: 1}}>
             <Button variant="contained" href="/admin/dashboard">Dashboard</Button>
             <Button href="/admin/products">Products</Button>
-            <Button href="/admin/orders">Orders</Button>
+            <Button href="/admin/province">Province</Button>
             <Button href="/admin/users">Users</Button>
         </Box>
     )
