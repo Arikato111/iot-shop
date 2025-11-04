@@ -17,7 +17,7 @@ import Link from 'next/link';
 import userCookie from '@/utils/cookie';
 
 const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Cart', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
     const info = new userCookie().decode() as { rank?: string } | null;
