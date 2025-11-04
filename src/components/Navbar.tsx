@@ -44,7 +44,7 @@ function ResponsiveAppBar() {
                         variant="h6"
                         noWrap
                         component="a"
-                        href="#app-bar-with-responsive-menu"
+                        href="/"
                         sx={{
                             mr: 2,
                             display: { xs: 'none', md: 'flex' },
@@ -135,7 +135,7 @@ function ResponsiveAppBar() {
 
 function IsAdmin() {
     return <Box>
-        <Button color="inherit" href="/admin">Admin</Button>
+        <Button color="inherit" href="/admin/products">Admin</Button>
     </Box>
 }
 
