@@ -26,7 +26,7 @@ export default function AdminProductPage() {
             <Button href="./products/add">Add product</Button>
             <Grid container columnSpacing={2} rowSpacing={2} padding={2} alignContent={"center"}>
                 {products.map((product, index) => (
-                    <Grid key={index} size={3}>
+                    <Grid key={index} size={{md: 6, lg: 3 }}>
                         <ProductCard imageUrl={product.image} price={product.price} name={product.name} />
                     </Grid>
                 ))}
