@@ -20,8 +20,13 @@ const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
-    const info = new userCookie().decode();
+    const info = new userCookie().decode() as { rank?: string } | null;
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
+    const [isClient, setIsClient] = React.useState(false);
+
+    React.useEffect(() => {
+        setIsClient(true);
+    }, []);
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -119,8 +124,8 @@ function ResponsiveAppBar() {
                             </Link>
                         ))}
                     </Box>
-                    {!!info && info.rank && <IsAdmin />}
-                    {(new userCookie()).isLogin() ? <Profile />:  <NotLogin /> }
+                    {isClient ? !!info && info.rank && <IsAdmin />: <></>}
+                    {(new userCookie()).isLogin() && isClient ? <Profile /> : <NotLogin />}
 
                 </Toolbar>
             </Container>
@@ -137,6 +142,7 @@ function IsAdmin() {
 function NotLogin() {
     return <Box>
         <Button color="inherit" href="/login">Login</Button>
+        <Button color="inherit" href="/register">Register</Button>
     </Box>
 }
 

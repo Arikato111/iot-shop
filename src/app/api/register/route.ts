@@ -19,9 +19,10 @@ export async function POST(request: NextRequest) {
     });
   }
 
+  console.log(province);
   const passwordHash = SHA1(password).toString();
   const provinceCheck = await db.province.findFirst({
-    where: { name: province },
+    where: { name: province.toString() },
   });
   if (!provinceCheck) {
     return new Response(JSON.stringify({ message: "Province not found" }), {

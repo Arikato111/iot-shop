@@ -31,7 +31,7 @@ model user {
 
 model Province {
   id      Int       @id @default(autoincrement())
-  name    String
+  name    String    @unique
   user    user[]
   product product[]
   order   order[]
@@ -42,7 +42,7 @@ model product {
   name             String
   detail           String
   price            Int
-  watch_count      Int
+  watch_count      Int            @default(0)
   image            String
   stock            Int
   place_of_sele    Province       @relation(fields: [place_of_sele_id], references: [id])
